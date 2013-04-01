@@ -179,21 +179,22 @@ if __name__ == "__main__":
         for ITEM in ITEMS:
             TOTAL += 1
 
+            identifier = ITEM["title"]
             if ITEM['score'] < ARGS.score:
                 if ARGS.verbose:
-                    print '    SCORE: %s has score of %s which is lower than required score of %s.' % (ITEM['id'], ITEM['score'], ARGS.score)
+                    print '    SCORE: %s has score of %s which is lower than required score of %s.' % (identifier, ITEM['score'], ARGS.score)
 
                 SKIPPED += 1
                 continue
             elif ARGS.sfw and ITEM['over_18']:
                 if ARGS.verbose:
-                    print '    NSFW: %s is marked as NSFW.' % (ITEM['id'])
+                    print '    NSFW: %s is marked as NSFW.' % (identifier)
 
                 SKIPPED += 1
                 continue
             elif ARGS.nsfw and not ITEM['over_18']:
                 if ARGS.verbose:
-                    print '    Not NSFW, skipping %s' % (ITEM['id'])
+                    print '    Not NSFW, skipping %s' % (identifier)
 
                 SKIPPED += 1
                 continue
@@ -215,8 +216,8 @@ if __name__ == "__main__":
 
                     # Only append numbers if more than one file.
                     FILENUM = ('_%d' % FILECOUNT if len(URLS) > 1 else '')
-                    FILENAME = '%s%s%s' % (ITEM['id'], FILENUM, FILEEXT)
-                    FILEPATH = pathjoin(ARGS.dir, FILENAME) 
+                    FILENAME = '%s%s%s' % (identifier, FILENUM, FILEEXT)
+                    FILEPATH = pathjoin(ARGS.dir, FILENAME)
 
                     # Download the image
                     download_from_url(URL, FILEPATH)
