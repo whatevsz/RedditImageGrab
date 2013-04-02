@@ -179,7 +179,7 @@ if __name__ == "__main__":
         for ITEM in ITEMS:
             TOTAL += 1
 
-            identifier = ITEM["title"]
+            identifier = ITEM["title"].replace('/', '-')
             if ITEM['score'] < ARGS.score:
                 if ARGS.verbose:
                     print '    SCORE: %s has score of %s which is lower than required score of %s.' % (identifier, ITEM['score'], ARGS.score)
